@@ -14,34 +14,53 @@ namespace familytreebrowser
     class Program
     {
 
-        public static string path = "C://Users//wiku//Desktop//OOP Coding Assignment//OOP Coding Assignment//familytrees.json";
+      public static string path = "familytrees.json";
+      public static List<object> persons = new List<object>();
+      
+
+
         static void Main(string[] args)
         {
-            
-            Console.WriteLine("First name is " + args.input);
-            Console.WriteLine("Last name is " + args[1]);
+           
+
+           /* if (args[0] == "-input")
+                path = args[1];
+            if (args[0] == "-sort")
+                //sortcode
+            if (args[0] == "-search")
+                    //searchcode
+            if (args[0] == "-findduplicateinfamilytree")
+                    //duplicatecode
+                    { } */
 
             string json = File.ReadAllText(path);
             dynamic file = JsonConvert.DeserializeObject(json);
 
 
-            //PrintKaikki(file);
+            PrintEveryOne(file);
+
+            
+
+            
 
         }
 
-    public static void PrintKaikki(dynamic json)
+    public static void PrintEveryOne(dynamic json)
     {       
             foreach(var obj in json)
             {
                 Console.WriteLine(obj.FirsName + " " + obj.LastName + " " + obj.Age);
                 
-                // TODO luo taulukko, johon lisätään nimet ja iät
+                // While looping through each object, i save the objects to sort later on
+                persons.Add(obj);
 
                  if (obj.Children != null)
-                   PrintKaikki(obj.Children);
+                   PrintEveryOne(obj.Children);
             }
 
         }
+
+
     }
 
 }
