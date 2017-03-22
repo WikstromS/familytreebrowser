@@ -14,8 +14,9 @@ namespace familytreebrowser
     class Program
     {
 
-      public static string path = "familytrees.json";
-      public static List<object> persons = new List<object>();
+        public static string path = "familytrees.json";
+ 
+    
       
 
 
@@ -23,7 +24,7 @@ namespace familytreebrowser
         {
            
 
-           /* if (args[0] == "-input")
+            if (args[0] == "-input")
                 path = args[1];
             if (args[0] == "-sort")
                 //sortcode
@@ -31,13 +32,17 @@ namespace familytreebrowser
                     //searchcode
             if (args[0] == "-findduplicateinfamilytree")
                     //duplicatecode
-                    { } */
+                    { } 
 
             string json = File.ReadAllText(path);
             dynamic file = JsonConvert.DeserializeObject(json);
+            
+
 
 
             PrintEveryOne(file);
+            Console.WriteLine("---------------------");
+            
 
             
 
@@ -46,19 +51,22 @@ namespace familytreebrowser
         }
 
     public static void PrintEveryOne(dynamic json)
-    {       
-            foreach(var obj in json)
-            {
-                Console.WriteLine(obj.FirsName + " " + obj.LastName + " " + obj.Age);
-                
+    {
+                foreach (var obj in json)
+                {
+                    Console.WriteLine(obj.FirsName + " " + obj.LastName + " " + obj.Age);
+
                 // While looping through each object, i save the objects to sort later on
-                persons.Add(obj);
-
+                string values = obj.FirsName + obj.LastName + obj.Age + obj.Gender;
+              
+    
                  if (obj.Children != null)
-                   PrintEveryOne(obj.Children);
-            }
-
+                        PrintEveryOne(obj.Children);
+                }
+                
+            
         }
+
 
 
     }
