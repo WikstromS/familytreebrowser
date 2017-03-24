@@ -17,3 +17,8 @@ C:\Users\Santun\familytreebrowser\familytreebrowser\bin\Debug\familytreebrowser.
 C:\Users\Santun\familytreebrowser\familytreebrowser\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Santun\familytreebrowser\familytreebrowser\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Santun\familytreebrowser\familytreebrowser\obj\Debug\familytreebrowser.csprojResolveAssemblyReference.cache
+C:\Users\wiku\familytreebrowser\familytreebrowser\bin\Debug\familytreebrowser.exe
+C:\Users\wiku\familytreebrowser\familytreebrowser\bin\Debug\familytreebrowser.pdb
+C:\Users\wiku\familytreebrowser\familytreebrowser\bin\Debug\Newtonsoft.Json.dll
+C:\Users\wiku\familytreebrowser\familytreebrowser\bin\Debug\Newtonsoft.Json.xml
+C:\Users\wiku\familytreebrowser\familytreebrowser\obj\Debug\familytreebrowser.csprojResolveAssemblyReference.cache
