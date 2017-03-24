@@ -25,10 +25,10 @@ namespace familytreebrowser
         static void Main(string[] args)
         {
            
-/*
+
+/*            if (args[0] == "-sort")
             if (args[0] == "-input")
-                //path = args[1];
-            if (args[0] == "-sort")
+                path = args[1];
                 //sortcode
             if (args[0] == "-search")
                     //searchcode
@@ -36,26 +36,24 @@ namespace familytreebrowser
                     //duplicatecode
                      */
 
-            string json = File.ReadAllText(path);
-            dynamic file = JsonConvert.DeserializeObject(json);
+            string json = File.ReadAllText(path);    //Reads the JSON file to a string
+            //dynamic file = JsonConvert.DeserializeObject(json);       THIS did not work.
             //Deserialisoi objektiin ja Henkilo luokkaan. Koska Json tiedosto oli Arraymuodossa tarvitsin muodon Henkilo[]
             var obj = JsonConvert.DeserializeObject<Henkilo[]>(json);
 
 
 
 
-            MakeAList(obj); //Luo listan
-            PrintEveryOne(obj); // tällä hetkellä PrintEveryOne metodissa lisätään kaikki listaan. TODO. Tee oma metodi, joka käy objektit läpi A'la PrintEveryOne ja lisää listaan.
+
+            PrintEveryOne(obj); // tällä hetkellä PrintEveryOne metodissa lisätään kaikki listaan. TODO.MakeList metodi tehty.
+            MakeList(obj);
+            Console.WriteLine("---------------------");
+            SortByAge(henkiloLista);
             Console.WriteLine("---------------------");
             Console.WriteLine(henkiloLista.Count);
-            //sorttaa lista by Age
-            List<Henkilo> sortedList = henkiloLista.OrderBy(o => o.Age).ToList();
-            foreach(var i in sortedList)
-            {
-                Console.WriteLine(i.Age);
-            }
-            
             /*
+            
+            
             for(int i = 0; i <obj.Length;i++ )
             {
                 Console.WriteLine(obj[i].FirsName);
@@ -89,40 +87,49 @@ namespace familytreebrowser
 
         }
 
-    public static void PrintEveryOne(dynamic json) {
+    public static void PrintEveryOne(dynamic json)
+    {
         
                 foreach (var obj in json)
                 {
                     Console.WriteLine(obj.FirsName + " " + obj.LastName + " " + obj.Age);
 
-
-
                  if (obj.Children != null)
                         PrintEveryOne(obj.Children);
-                
-                }
-                
-            
+                }            
         }
 
-        public static void MakeAList(dynamic json)
+    public static void SortByAge(List<Henkilo> list)
+        {
+            List<Henkilo> sortedList = list.OrderBy(o => o.Age).ToList();
+            foreach(var i in sortedList)
+            {
+                Console.WriteLine(i.Age);
+            }
+        }
+
+    public static void SortByLastName(List<Henkilo> list)
         {
 
+        }
+
+    public static void MakeList(dynamic json)
+        {
             foreach (var obj in json)
             {
 
+
+                // While looping through each object, save objects to a list using a constructor
                 henkiloLista.Add(new Henkilo(obj.FirsName, obj.LastName, obj.Gender, obj.Age));
 
                 if (obj.Children != null)
-                    PrintEveryOne(obj.Children);
+                    MakeList(obj.Children);
 
             }
 
-
         }
 
-
-
+ 
 
 
 
