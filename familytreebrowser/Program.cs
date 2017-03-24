@@ -15,7 +15,7 @@ namespace familytreebrowser
     class Program
     {
 
-        public static string path = "familytrees.json";
+        public static string path = "";
         public static List<Henkilo> henkiloLista = new List<Henkilo>();
 
 
@@ -24,33 +24,42 @@ namespace familytreebrowser
 
         static void Main(string[] args)
         {
-           
 
-/*            if (args[0] == "-sort")
-            if (args[0] == "-input")
+
+            if (args[0] == "-input") { 
                 path = args[1];
-                //sortcode
-            if (args[0] == "-search")
-                    //searchcode
-            if (args[0] == "-findduplicateinfamilytree")
-                    //duplicatecode
-                     */
+                string json = File.ReadAllText(path);       //Reads the JSON file to a string
+                var obj = JsonConvert.DeserializeObject<Henkilo[]>(json);
+                MakeList(obj);
+            }
+            
 
-            string json = File.ReadAllText(path);    //Reads the JSON file to a string
+            if (args[2] == "-sort") {
+                if (args[3] == "age")
+                    SortByAge(henkiloLista);
+                if (args[3] == "lastname")
+                    SortByLastName(henkiloLista);
+            }
+            //if (args[0] == "-search")
+                    //searchcode
+            //if (args[0] == "-findduplicateinfamilytree")
+                    //duplicatecode
+                     
+
             //dynamic file = JsonConvert.DeserializeObject(json);       THIS did not work.
             //Deserialisoi objektiin ja Henkilo luokkaan. Koska Json tiedosto oli Arraymuodossa tarvitsin muodon Henkilo[]
-            var obj = JsonConvert.DeserializeObject<Henkilo[]>(json);
 
 
 
 
-
-            PrintEveryOne(obj); // tällä hetkellä PrintEveryOne metodissa lisätään kaikki listaan. TODO.MakeList metodi tehty.
-            MakeList(obj);
-            Console.WriteLine("---------------------");
-            SortByAge(henkiloLista);
-            Console.WriteLine("---------------------");
-            Console.WriteLine(henkiloLista.Count);
+           // PrintEveryOne(obj);
+            //Console.WriteLine("---------------------");
+          //  SortByAge(henkiloLista);
+            //Console.WriteLine("---------------------");
+            //Console.WriteLine(henkiloLista.Count);
+            //Console.WriteLine("---------------------");
+            //SortByLastName(henkiloLista);
+            
             /*
             
             
@@ -101,17 +110,22 @@ namespace familytreebrowser
 
     public static void SortByAge(List<Henkilo> list)
         {
-            List<Henkilo> sortedList = list.OrderBy(o => o.Age).ToList();
-            foreach(var i in sortedList)
+            List<Henkilo> sortedByAgeList = list.OrderBy(o => o.Age).ToList();
+            foreach(var i in sortedByAgeList)
             {
-                Console.WriteLine(i.Age);
+                Console.WriteLine(i.FirsName + " " +  i.LastName + " "+ i.Age);
             }
         }
 
     public static void SortByLastName(List<Henkilo> list)
         {
-
+            List<Henkilo> sortedByLastname = list.OrderBy(o => o.LastName).ToList();
+            foreach(var i in sortedByLastname)
+            {
+                Console.WriteLine(i.FirsName + " " + i.LastName + " " + i.Age);
+            }
         }
+
 
     public static void MakeList(dynamic json)
         {
@@ -128,11 +142,6 @@ namespace familytreebrowser
             }
 
         }
-
- 
-
-
-
 
 
 
