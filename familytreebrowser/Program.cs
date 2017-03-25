@@ -51,8 +51,6 @@ namespace familytreebrowser
                            break;
                        }
 
-
-
                    } 
 
                }   
@@ -158,28 +156,18 @@ namespace familytreebrowser
             }
 
         }
-
-
-        public static void PrintTen(List<Henkilo> list)
+    
+    public static void Search(List<Henkilo> list , string str)
         {
-            int counter = 0;
-            foreach (var i in list)
+            foreach(var i in list)
             {
-                Console.WriteLine(i.FirsName + " " + i.LastName + " " + i.Age);
-                counter++;
-
-
-                if (counter == 10 || counter == 20 || counter == 30 || counter == 40)
+                if(i.FirsName.Contains(str) || i.LastName.Contains(str))
                 {
-                    Console.WriteLine("Press Enter to show next 10 values");
-                    if (Console.ReadKey().Key == ConsoleKey.Enter)
-                        continue;
-
-
+                    Console.WriteLine(i.FirsName + " " + i.LastName + " " + i.Age);
                 }
             }
-
         }
+
 
 
 
