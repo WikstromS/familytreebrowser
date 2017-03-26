@@ -4,7 +4,9 @@ A console application dedicated to work with .json files.
 # How to use this program?
   1. Clone or download the repository to your computer. The .Net framework is needed to use this program but if you are using Windows 7 or newer it should be preinstalled. The framework installer is included in the repo so you can use it or download it from microsofts page.
   2. Go to familytreebrowser --> bin --> Debug --> Then press shift and right click and open command line to this directory.
-  3. The commands you can use:
+  3. If you want to change the Json file, just copy the file to this directory and then proceed to use the program example:
+  familytreebrowser.exe -input newjsonfile.json
+  4. The commands you can use:
   
       -input yourfilename : Sets the file and prints everyone on the file. Example: familytreebrowser.exe -input familytree.json
       
