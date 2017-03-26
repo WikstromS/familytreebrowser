@@ -68,7 +68,7 @@ namespace familytreebrowser
                 else
                     Console.WriteLine("Ms " + obj.FirsName + " " + obj.LastName + " " + obj.Age);
                 counter++;
-                //Functionality to print 10 at a time
+                //Functionality to print 10 at a time. Only works till 70
                 if (counter == 10 || counter == 20 || counter == 30 || counter == 40 || counter == 50 || counter == 60 || counter == 70)
                 {
                     Console.WriteLine("Press Enter to show next  values");
