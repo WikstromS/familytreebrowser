@@ -16,7 +16,7 @@ namespace familytreebrowser
     {
 
         public static string path = "familytrees.json";
-        public static List<Henkilo> henkiloLista = new List<Henkilo>();
+        public static List<Person> PersonList = new List<Person>();
 
 
         static void Main(string[] args)
@@ -27,29 +27,29 @@ namespace familytreebrowser
                    {
                        path = args[1];
                        string json = File.ReadAllText(path);       //Reads the JSON file to a string
-                       var obj = JsonConvert.DeserializeObject<Henkilo[]>(json);
+                       var obj = JsonConvert.DeserializeObject<Person[]>(json);
                        MakeList(obj);
                        if(args.Length == 2)
                        {
-                           PrintEveryOne(henkiloLista);
+                           PrintEveryOne(PersonList);
                            break;
                        }
 
                        if(args[2] == "-sort" && args[3] == "age")
                        {
-                           SortByAge(henkiloLista);
+                           SortByAge(PersonList);
                            break;
                        }
                        if (args[2] == "-sort" && args[3] == "lastname")
                        {
-                           SortByLastName(henkiloLista);
+                           SortByLastName(PersonList);
                            break;
                        }
 
                        if(args[2] == "-search")
                         {
                         string searchCriteria = args[3];
-                        Search(henkiloLista, searchCriteria);
+                        Search(PersonList, searchCriteria);
                         break;
                         }
 
@@ -83,9 +83,9 @@ namespace familytreebrowser
                 }            
         }
 
-    public static void SortByAge(List<Henkilo> list)    //Method sorts the list by Age using LINQ and then prints them out in order using same functionality as the method above.
+    public static void SortByAge(List<Person> list)    //Method sorts the list by Age using LINQ and then prints them out in order using same functionality as the method above.
         {
-            List<Henkilo> sortedByAgeList = list.OrderBy(o => o.Age).ToList();
+            List<Person> sortedByAgeList = list.OrderBy(o => o.Age).ToList();
             int counter = 0;
             foreach(var i in sortedByAgeList)
             {
@@ -104,9 +104,9 @@ namespace familytreebrowser
             }
         }
 
-    public static void SortByLastName(List<Henkilo> list)   //Method sorts the list lastname using LINQ. Works pretty much as the above method.
+    public static void SortByLastName(List<Person> list)   //Method sorts the list lastname using LINQ. Works pretty much as the above method.
         {
-            List<Henkilo> sortedByLastname = list.OrderBy(o => o.LastName).ToList();
+            List<Person> sortedByLastname = list.OrderBy(o => o.LastName).ToList();
             int counter = 0;
 
             foreach (var i in sortedByLastname)
@@ -132,7 +132,7 @@ namespace familytreebrowser
             foreach (var obj in json)
             {
                 // While looping through each object, save objects to a list using a constructor
-                henkiloLista.Add(new Henkilo(obj.FirsName, obj.LastName, obj.Gender, obj.Age));
+                PersonList.Add(new Person(obj.FirsName, obj.LastName, obj.Gender, obj.Age));
 
                 if (obj.Children != null)
                     MakeList(obj.Children);
@@ -140,7 +140,7 @@ namespace familytreebrowser
 
         }
     
-    public static void Search(List<Henkilo> list , string str)  //This method searches the list and checks if the firstname or lastname contains the string given. 
+    public static void Search(List<Person> list , string str)  //This method searches the list and checks if the firstname or lastname contains the string given. 
         {
             foreach(var i in list)
             {
@@ -156,16 +156,16 @@ namespace familytreebrowser
     }
 
 
-    public class Henkilo
+    public class Person
     {
         public string FirsName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
         public int Age { get; set; }
-        public IList<Henkilo> Children { get; set; }
+        public IList<Person> Children { get; set; }
 
 
-        public Henkilo(string firstname, string lastname, string gender, int age)
+        public Person(string firstname, string lastname, string gender, int age)
         {
             this.FirsName = firstname;
             this.LastName = lastname;
