@@ -15,7 +15,7 @@ A console application dedicated to work with .json files.
 # The most important parts in the code
 
 I think the most important parts are:
-    1. The part to properly deserialize the json and build my list using the Henkilo constructor.
+    1. The part to properly deserialize the json and build my list using the Person constructor.
     2. The Main loop for checking input arguments. This is something I have never done before. 
     3. I tried to stay true to OOP practices but I am sure this is not perfect or optimized.
     
