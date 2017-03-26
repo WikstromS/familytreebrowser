@@ -12,3 +12,17 @@ A console application dedicated to work with .json files.
       
       -search "searchterm": returns persons with searchterm in their last or firstname. Example: familytreebrowser.exe -input familytree.json -search J
       
+# The most important parts in the code
+
+I think the most important parts are:
+    1. The part to properly deserialize the json and build my list using the Henkilo constructor.
+    2. The Main loop for checking input arguments. This is something I have never done before. 
+    3. I tried to stay true to OOP practices but I am sure this is not perfect or optimized.
+    
+# Retrospctive about the project
+
+    All in all this project was really great. At first it was daunting as it had lots of 
+    problems I've never dealt with before so it was truly a great learning experience. 
+    I've also never handled JSON files in a C# program so that was new. I quickly learnt that
+    .Net doesn't have any good tools for this so I ended up using a library called JSON.Net and it 
+    got the job done 
