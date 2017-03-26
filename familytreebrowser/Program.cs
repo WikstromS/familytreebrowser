@@ -21,11 +21,6 @@ namespace familytreebrowser
 
         static void Main(string[] args)
         {
-            /*
-            string json = File.ReadAllText(path);       //Reads the JSON file to a string
-            var obj = JsonConvert.DeserializeObject<Henkilo[]>(json);
-            MakeList(obj);
-            */    
                for (int i = 0; i < args.Length; i++)
                {
                    if(args[0] == "-input")
@@ -51,46 +46,30 @@ namespace familytreebrowser
                            break;
                        }
 
+                       if(args[2] == "-search")
+                        {
+                        string searchCriteria = args[3];
+                        Search(henkiloLista, searchCriteria);
+                        break;
+                        }
+
                    } 
 
                }   
-
-            /*
-            if (args[0] == "-input")
-            {
-                path = args[1];
-                string json = File.ReadAllText(path);       //Reads the JSON file to a string
-                var obj = JsonConvert.DeserializeObject<Henkilo[]>(json);
-                MakeList(obj);
-                PrintEveryOne(obj);
-
-
-
-                if (args[2] == "-sort" && args[3] == "age")
-                    SortByAge(henkiloLista);
-
-                if (args[2] == "-sort" && args[3] == "lastname")
-                    SortByLastName(henkiloLista);
-
-            }
-    */
-
-            //if (args[0] == "-search")
-            //searchcode
-            //if (args[0] == "-findduplicateinfamilytree")
-            //duplicatecode
-
-
         }
 
-    public static void PrintEveryOne(dynamic json)
+    public static void PrintEveryOne(dynamic json)      // Method prints every objects firstname, lastname, age and the Mr or Ms depending on the objects Gender. Finally there is the functionality to print 10 at a time.
     {
             int counter = 0;
                 foreach (var obj in json)
                 {
-                    Console.WriteLine(obj.FirsName + " " + obj.LastName + " " + obj.Age);
+                if(obj.Gender == "Male")
+                    Console.WriteLine("Mr " + obj.FirsName + " " + obj.LastName + " " + obj.Age);
+                else
+                    Console.WriteLine("Ms " + obj.FirsName + " " + obj.LastName + " " + obj.Age);
                 counter++;
-                if (counter == 10 || counter == 20 || counter == 30 || counter == 40)
+                //Functionality to print 10 at a time
+                if (counter == 10 || counter == 20 || counter == 30 || counter == 40 || counter == 50 || counter == 60 || counter == 70)
                 {
                     Console.WriteLine("Press Enter to show next  values");
                     if (Console.ReadKey().Key == ConsoleKey.Enter)
@@ -104,47 +83,51 @@ namespace familytreebrowser
                 }            
         }
 
-    public static void SortByAge(List<Henkilo> list)
+    public static void SortByAge(List<Henkilo> list)    //Method sorts the list by Age using LINQ and then prints them out in order using same functionality as the method above.
         {
             List<Henkilo> sortedByAgeList = list.OrderBy(o => o.Age).ToList();
             int counter = 0;
             foreach(var i in sortedByAgeList)
             {
-                Console.WriteLine(i.FirsName + " " +  i.LastName + " "+ i.Age);
+                if (i.Gender == "Male")
+                    Console.WriteLine("Mr " + i.FirsName + " " + i.LastName + " " + i.Age);
+                else
+                    Console.WriteLine("Ms " + i.FirsName + " " + i.LastName + " " + i.Age);
+
                 counter++;
-                if (counter == 10 || counter == 20 || counter == 30 || counter == 40)
+                if (counter == 10 || counter == 20 || counter == 30 || counter == 40 || counter == 50 || counter == 60 || counter == 70)
                 {
                     Console.WriteLine("Press Enter to show next  values");
                     if (Console.ReadKey().Key == ConsoleKey.Enter)
                         continue;
-
-
                 }
             }
         }
 
-    public static void SortByLastName(List<Henkilo> list)
+    public static void SortByLastName(List<Henkilo> list)   //Method sorts the list lastname using LINQ. Works pretty much as the above method.
         {
             List<Henkilo> sortedByLastname = list.OrderBy(o => o.LastName).ToList();
             int counter = 0;
 
             foreach (var i in sortedByLastname)
             {
-                Console.WriteLine(i.FirsName + " " + i.LastName + " " + i.Age);
+                if (i.Gender == "Male")
+                    Console.WriteLine("Mr " + i.FirsName + " " + i.LastName + " " + i.Age);
+                else
+                    Console.WriteLine("Ms " + i.FirsName + " " + i.LastName + " " + i.Age);
+
                 counter++;
                 if (counter == 10 || counter == 20 || counter == 30 || counter == 40)
                 {
                     Console.WriteLine("Press Enter to show next  values");
                     if (Console.ReadKey().Key == ConsoleKey.Enter)
                         continue;
-
-
                 }
             }
         }
 
 
-    public static void MakeList(dynamic json)
+    public static void MakeList(dynamic json)   //This method Loops through the file and adds objects to a list using a constructor.
         {
             foreach (var obj in json)
             {
@@ -157,22 +140,21 @@ namespace familytreebrowser
 
         }
     
-    public static void Search(List<Henkilo> list , string str)
+    public static void Search(List<Henkilo> list , string str)  //This method searches the list and checks if the firstname or lastname contains the string given. 
         {
             foreach(var i in list)
             {
                 if(i.FirsName.Contains(str) || i.LastName.Contains(str))
                 {
-                    Console.WriteLine(i.FirsName + " " + i.LastName + " " + i.Age);
+                    if (i.Gender == "Male")
+                        Console.WriteLine("Mr " + i.FirsName + " " + i.LastName + " " + i.Age);
+                    else
+                        Console.WriteLine("Ms " + i.FirsName + " " + i.LastName + " " + i.Age);
                 }
             }
         }
-
-
-
-
-
     }
+
 
     public class Henkilo
     {
@@ -181,6 +163,7 @@ namespace familytreebrowser
         public string Gender { get; set; }
         public int Age { get; set; }
         public IList<Henkilo> Children { get; set; }
+
 
         public Henkilo(string firstname, string lastname, string gender, int age)
         {
