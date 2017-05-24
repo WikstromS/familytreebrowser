@@ -21,7 +21,7 @@ I think the most important parts are:
     2. The Main loop for checking input arguments. This is something I have never done before. 
     3. I tried to stay true to OOP practices but I am sure this is not perfect or optimized.
     
-# Retrospctive about the project
+# Retrospective about the project
 
     All in all this project was really great. At first it was daunting as it had lots of 
     problems I've never dealt with before so it was truly a great learning experience. 
